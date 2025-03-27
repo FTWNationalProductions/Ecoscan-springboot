@@ -1,5 +1,7 @@
 package com.ftw.ecoscan.auth;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,11 @@ public class AuthController {
     
     @GetMapping()
     public ResponseEntity<User> auth(@RequestBody User user) {
-        return service.auth(user);
+        try{
+            return service.auth(user);
+        } catch(NoSuchElementException error){
+            return ResponseEntity.notFound().build();
+        }
     }
     
 }
