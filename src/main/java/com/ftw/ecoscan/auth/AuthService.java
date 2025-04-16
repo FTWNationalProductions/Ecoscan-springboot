@@ -1,5 +1,7 @@
 package com.ftw.ecoscan.auth;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,9 @@ public class AuthService {
     private UserRepository repository;
 
     public ResponseEntity<User> auth(User user) {
-        User userLogin = repository.findByEmailAndSenha(user.getEmail(), user.getSenha());
-
-        return ResponseEntity.ok(userLogin);
+        User login = repository.findByEmailAndSenha(user.getEmail(), user.getSenha())
+                .orElseThrow(() -> new NoSuchElementException());
+        return ResponseEntity.ok(login);
     }
 
 }

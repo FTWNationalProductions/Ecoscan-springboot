@@ -32,7 +32,8 @@ public class UserService {
     }
 
     public ResponseEntity<User> updateUser(Long id, User user) {
-        User subject = repository.findById(id).orElseThrow(() -> new NoSuchElementException());
+        User subject = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException());
 
         subject.setData(user.getNome(), user.getEmail(), user.getSenha());
         User saved = repository.save(subject);
