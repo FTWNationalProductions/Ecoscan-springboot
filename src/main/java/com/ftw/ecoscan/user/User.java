@@ -1,4 +1,6 @@
-package com.ftw.ecoscan.usuario;
+package com.ftw.ecoscan.user;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,9 +11,9 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "usuario")
-public class Usuario {
-    
+@Table(name = "tb_user")
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,4 +21,12 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+
+    private LocalDate createdAt;
+
+    public void setData(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
 }
